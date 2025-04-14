@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const SearchBlogs = ({ onClose }: { onClose: () => void }) => {
   const [formData, setFormData] = useState({ search: "" });
   const [blogs, setBlogs] = useState<
-    { id: number; title: string; description: string; image: string }[]
+    { _id: string; title: string; description: string; image: string }[]
   >([]);
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const SearchBlogs = ({ onClose }: { onClose: () => void }) => {
       });
   };
 
-  const handleBlogClick = (id: number) => {
+  const handleBlogClick = (id: string) => {
     navigate(`/blog/${id}`);
     onClose();
   };
@@ -47,14 +47,14 @@ const SearchBlogs = ({ onClose }: { onClose: () => void }) => {
           {blogs &&
             blogs.map((blog) => (
               <li
-                key={blog.id}
-                onClick={() => handleBlogClick(blog.id)}
+                key={blog._id}
+                onClick={() => handleBlogClick(blog._id)}
                 className="flex gap-2 cursor-pointer p-2 hover:shadow-2xl rounded-lg transition-transform duration-200 transform hover:scale-105"
               >
                 <div className="w-1/3">
                   <img className="" src={blog.image} alt="" />
                 </div>
-                <div key={blog.id} className="flex flex-col w-2/3">
+                <div key={blog._id} className="flex flex-col w-2/3">
                   <h2 className="font-semibold">{blog.title}</h2>
                   <p className="text-justify">
                     {blog.description.length > 130
